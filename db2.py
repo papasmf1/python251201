@@ -1,11 +1,12 @@
 # db1.py 
 import sqlite3
-#연결객체 생성
-con = sqlite3.connect(":memory:")
+#연결객체 생성(영구적으로 저장)
+#raw string 처리: r"경로명"
+con = sqlite3.connect(r"c:\work\sample.db")
 #커서객체 생성
 cur = con.cursor()
 #테이블 생성
-cur.execute("CREATE TABLE PhoneBook (name text, phoneNum text);")
+cur.execute("CREATE TABLE IF NOT EXISTS PhoneBook (name text, phoneNum text);")
 #데이터 삽입
 cur.execute("INSERT INTO PhoneBook VALUES ('홍길동', '010-1234-5678');")
 
@@ -18,16 +19,10 @@ cur.execute("INSERT INTO PhoneBook VALUES (?, ?);", (name, phoneNum))
 datalist = (("전우치","010-222-1234"), ("이순신","010-333-5678"))   
 cur.executemany("INSERT INTO PhoneBook VALUES (?, ?);", datalist)
 
-#데이터 조회
 cur.execute("SELECT * FROM PhoneBook;")
-print("---fetchone()---")
-print(cur.fetchone())  #한행조회
-print("---fetchmany(2)---") 
-print(cur.fetchmany(2)) #지정한 행수만큼 조회
-print("---fetchall()---")
-cur.execute("SELECT * FROM PhoneBook;")
-print(cur.fetchall())  #전체행조회
-
 #블럭주석처리:ctrl+/
-# for row in cur:
-#     print(row)
+for row in cur:
+    print(row)
+
+#변경내용 저장
+con.commit()
