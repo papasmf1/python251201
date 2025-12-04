@@ -116,7 +116,6 @@ class Window(QMainWindow, form_class):
         self.prodName.setText(self.tableWidget.item(self.tableWidget.currentRow(), 1).text())
         self.prodPrice.setText(self.tableWidget.item(self.tableWidget.currentRow(), 2).text())
 
-
 #인스턴스를 생성한다. 
 app = QApplication(sys.argv)
 myWindow = Window()

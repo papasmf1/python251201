@@ -15,7 +15,7 @@ class Form(QMainWindow):
         self.setGeometry(200, 200, 800, 800)
         
         #입력 텍스트 
-        self.lineEdit = QLineEdit("", self)
+        self.lineEdit = QLineEdit("아이폰", self)
         self.lineEdit.move(20, 20)
 
         #버튼
